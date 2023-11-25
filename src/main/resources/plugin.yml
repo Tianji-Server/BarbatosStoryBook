@@ -1,0 +1,11 @@
+name: BarbatosStoryBook
+version: '${project.version}'
+main: com.ghostchu.mcplugins.barbatosstorybook.BarbatosStoryBook
+api-version: 1.13
+commands:
+  storybook:
+    description: Add a storybook chest
+  randomstorybook:
+    description: Lucky Today! Pick a random story book to see
+  openspecificstorybook:
+    description: Open a specific storybook
