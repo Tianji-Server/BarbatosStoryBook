@@ -220,7 +220,7 @@ public final class BarbatosStoryBook extends JavaPlugin implements Listener {
 
     private void openBookForPlayer(Player p, StoryBook book, long id) {
         p.openBook(book.getItemStack());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(getConfig().getString("openbook"),
                 book.getAuthor().orElse("匿名"),
                 book.getTitle().orElse("无名"),
