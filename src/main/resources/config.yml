@@ -1,4 +1,5 @@
 server: zeroth
+also-write-to-file: true
 
 database:
   host: localhost

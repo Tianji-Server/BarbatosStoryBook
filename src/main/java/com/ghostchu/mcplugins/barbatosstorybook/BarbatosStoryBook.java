@@ -132,7 +132,9 @@ public final class BarbatosStoryBook extends JavaPlugin implements Listener {
             for (Map.Entry<ItemStack, StoryBook> book : map.entrySet()) {
                 StoryBook storyBook = book.getValue();
                 try {
-                    storyBook.writeTo(getDataFolder());
+                    if (getConfig().getBoolean("also-write-to-file")) {
+                        storyBook.writeTo(getDataFolder());
+                    }
                     int changed = databaseHelper.addNewStoryBook(storyBook, serverName).join();
                     if (changed == 0) {
                         getLogger().log(Level.WARNING, "处理故事书时出错: 0 行受到影响");
