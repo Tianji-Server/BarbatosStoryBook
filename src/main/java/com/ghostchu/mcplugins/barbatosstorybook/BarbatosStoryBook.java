@@ -23,6 +23,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -169,6 +170,12 @@ public final class BarbatosStoryBook extends JavaPlugin implements Listener {
                 }
                 BlockState state = block.getState();
                 if (state instanceof Container c) {
+                    BlockBreakEvent event = new BlockBreakEvent(c.getBlock(), p);
+                    Bukkit.getPluginManager().callEvent(event);
+                    if (event.isCancelled()) {
+                        p.sendMessage("此容器不能被设置为故事箱：权限检查失败");
+                        return true;
+                    }
                     c.getPersistentDataContainer().set(KEY, PersistentDataType.BOOLEAN, true);
                     c.update(true);
                     p.sendMessage("容器设置成功");
