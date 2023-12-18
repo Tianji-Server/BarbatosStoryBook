@@ -224,6 +224,30 @@ public final class BarbatosStoryBook extends JavaPlugin implements Listener {
                 return false;
             }
         }
+        if (command.getName().equals("getspecificstorybook")) {
+            if (sender instanceof Player p) {
+                if (!p.hasPermission("barabtosstorybook.get")) {
+                    return false;
+                }
+                long id = Long.parseLong(args[0]);
+                databaseHelper.getStoryBook(id).thenAccept(optional -> {
+                    if (optional.isEmpty()) {
+                        p.sendMessage("现在好像还没有人写下自己的故事……？");
+                        return;
+                    }
+                    StoryBook book = optional.get();
+                    boolean success = p.getInventory().addItem(book.getItemStack()).isEmpty();
+                    if (success) {
+                        p.sendMessage("已添加到背包中");
+                    } else {
+                        p.sendMessage("添加到背包失败");
+                    }
+                });
+                return true;
+            } else {
+                return false;
+            }
+        }
         return true;
     }
 

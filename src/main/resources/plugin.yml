@@ -9,3 +9,5 @@ commands:
     description: Lucky Today! Pick a random story book to see
   openspecificstorybook:
     description: Open a specific storybook
+  getspecificstorybook:
+    description: Get a specific storybook
