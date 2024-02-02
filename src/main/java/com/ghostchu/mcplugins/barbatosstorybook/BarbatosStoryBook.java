@@ -118,6 +118,15 @@ public final class BarbatosStoryBook extends JavaPlugin implements Listener {
         Map<ItemStack, StoryBook> map = new LinkedHashMap<>();
         for (ItemStack stack : inventory.getStorageContents()) {
             if (stack == null) continue;
+            if (stack.getType() == Material.WRITABLE_BOOK) {
+                player.sendMessage(ChatColor.GRAY + "需要经过 “签名” 变成 “成书” 才可以放进去哦！");
+                if (!player.getInventory().addItem(stack.clone()).isEmpty()) {
+                    player.getLocation().getWorld().dropItem(player.getLocation(), stack.clone());
+                }
+                stack.setAmount(0);
+                stack.setType(Material.AIR);
+                continue;
+            }
             if (stack.getType() != Material.WRITTEN_BOOK) continue;
             if (!(stack.getItemMeta() instanceof BookMeta bookMeta)) continue;
             String author = bookMeta.getAuthor();
